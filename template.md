@@ -124,22 +124,42 @@ column names
 
 ``` r
 litters_df=
-  read.csv(
-    file = "data/FAS_litters.csv"
+  read_csv(
+    file = "./data/FAS_litters.csv"
                     # col_names = FALSE,
                     # skip = 2
   )
 ```
 
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (4): Group, Litter Number, GD0 weight, GD18 weight
+    ## dbl (4): GD of Birth, Pups born alive, Pups dead @ birth, Pups survive
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
 what about missing data
 
 ``` r
 litters_df=
-  read.csv(
-    file = "data/FAS_litters.csv",
+  read_csv(
+    file = "./data/FAS_litters.csv",
     na = c(".", "NA", "")
   )
+```
 
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Group, Litter Number
+    ## dbl (6): GD0 weight, GD18 weight, GD of Birth, Pups born alive, Pups dead @ ...
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
 litters_df = janitor::clean_names(litters_df)
 pull(litters_df, gd0_weight)
 ```
@@ -160,3 +180,60 @@ litters_df =
     )
 )
 ```
+
+## Import an excel file
+
+improt MLB 2011 summary data
+
+``` r
+mlb_df = read_excel("data/mlb11.xlsx", sheet = "mlb11")
+```
+
+## Import SAS data
+
+``` r
+pulse_df = read_sas("data/public_pulse_data.sas7bdat")
+
+pulse_df
+```
+
+    ## # A tibble: 1,087 × 7
+    ##       ID   age Sex    BDIScore_BL BDIScore_01m BDIScore_06m BDIScore_12m
+    ##    <dbl> <dbl> <chr>        <dbl>        <dbl>        <dbl>        <dbl>
+    ##  1 10003  48.0 male             7            1            2            0
+    ##  2 10015  72.5 male             6           NA           NA           NA
+    ##  3 10022  58.5 male            14            3            8           NA
+    ##  4 10026  72.7 male            20            6           18           16
+    ##  5 10035  60.4 male             4            0            1            2
+    ##  6 10050  84.7 male             2           10           12            8
+    ##  7 10078  31.3 male             4            0           NA           NA
+    ##  8 10088  56.9 male             5           NA            0            2
+    ##  9 10091  76.0 male             0            3            4            0
+    ## 10 10092  74.2 female          10            2           11            6
+    ## # ℹ 1,077 more rows
+
+## Never use read.csv()
+
+``` r
+litters_df = read.csv("data/FAS_litters.csv")
+```
+
+Never do this either:
+
+``` r
+litters_df$L
+```
+
+    ##  [1] "#85"             "#1/2/95/2"       "#5/5/3/83/3-3"   "#5/4/2/95/2"    
+    ##  [5] "#4/2/95/3-3"     "#2/2/95/3-2"     "#1/5/3/83/3-3/2" "#3/83/3-3"      
+    ##  [9] "#2/95/3"         "#3/5/2/2/95"     "#5/4/3/83/3"     "#1/6/2/2/95-2"  
+    ## [13] "#3/5/3/83/3-3-2" "#2/2/95/2"       "#3/6/2/2/95-3"   "#59"            
+    ## [17] "#103"            "#1/82/3-2"       "#3/83/3-2"       "#2/95/2-2"      
+    ## [21] "#3/82/3-2"       "#4/2/95/2"       "#5/3/83/5-2"     "#8/110/3-2"     
+    ## [25] "#106"            "#94/2"           "#62"             "#84/2"          
+    ## [29] "#107"            "#85/2"           "#98"             "#102"           
+    ## [33] "#101"            "#111"            "#112"            "#97"            
+    ## [37] "#5/93"           "#5/93/2"         "#7/82-3-2"       "#7/110/3-2"     
+    ## [41] "#2/95/2"         "#82/4"           "#53"             "#79"            
+    ## [45] "#100"            "#4/84"           "#108"            "#99"            
+    ## [49] "#110"
