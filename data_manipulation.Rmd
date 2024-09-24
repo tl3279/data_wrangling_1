@@ -151,4 +151,4 @@ litters_df =
 
 write_csv(litters_df, "data/cleaned_fas_litters.csv")
 ```
-
+Select() keep the data structure while pull() only gets the numbers out
