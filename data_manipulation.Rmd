@@ -7,7 +7,6 @@ output: github_document
 library(tidyverse)
 ```
 
-
 This document will show how to "manipulate" data
 
 Import the two datasets that we are going to manipulate
@@ -121,8 +120,8 @@ arrange(litters_df, desc(gd0_weight))
 arrange(litters_df, pups_born_alive, gd0_weight)
 ```
 
-
 ## PIPING
+
 ```{r, include = FALSE, eval = FALSE}
 select(janitor::clean_names(read_csv("data/FAS_litters.csv"),na = c("NA","",".")), -pups_born_alive, group == "Con7")
 ```
@@ -151,4 +150,5 @@ litters_df =
 
 write_csv(litters_df, "data/cleaned_fas_litters.csv")
 ```
+
 Select() keep the data structure while pull() only gets the numbers out
