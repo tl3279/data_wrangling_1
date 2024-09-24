@@ -1,23 +1,17 @@
----
-title: "tidy_data"
-author: "Tianqi Li"
-date: "2024-09-24"
-output: github_document
----
-
-```{r echo = FALSE, message = FALSE}
-library(tidyverse)
-```
+tidy_data
+================
+Tianqi Li
+2024-09-24
 
 This document will show how to tidy data.
 
-```{r}
+``` r
 pulse_df = 
   haven::read_sas("data/public_pulse_data.sas7bdat") |>
   janitor::clean_names()
 ```
 
-```{r}
+``` r
 pulse_tidy_df =
   pulse_df |>
   pivot_longer(
@@ -33,13 +27,23 @@ pulse_tidy_df =
 ```
 
 Do one more example
-```{r}
+
+``` r
 litters_df = 
   read_csv("data/FAS_litters.csv", na = c("NA", "",".")) |>
   janitor::clean_names()
 ```
 
-```{r}
+    ## Rows: 49 Columns: 8
+    ## ── Column specification ────────────────────────────────────────────────────────
+    ## Delimiter: ","
+    ## chr (2): Group, Litter Number
+    ## dbl (6): GD0 weight, GD18 weight, GD of Birth, Pups born alive, Pups dead @ ...
+    ## 
+    ## ℹ Use `spec()` to retrieve the full column specification for this data.
+    ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+``` r
 litters_tidy_df = 
   litters_df |>
     pivot_longer(
@@ -54,4 +58,3 @@ litters_tidy_df =
       "gd18_weight" ~ 18
     ))
 ```
-
