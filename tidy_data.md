@@ -58,3 +58,32 @@ litters_tidy_df =
       "gd18_weight" ~ 18
     ))
 ```
+
+## Pivot_wider
+
+Let’s make up an analysis result table
+
+``` r
+analysis_df = 
+  tibble(
+    group = c("treatment", "treatment", "control", "control"),
+    time = c("pre", "post", "pre", "post"),
+    mean = c(4, 10, 4.2, 5)
+  )
+```
+
+Pivot wider for human readability
+
+``` r
+analysis_df |>
+  pivot_wider(
+    names_from = time,
+    values_from = mean
+  ) |>
+  knitr::kable()
+```
+
+| group     | pre | post |
+|:----------|----:|-----:|
+| treatment | 4.0 |   10 |
+| control   | 4.2 |    5 |
